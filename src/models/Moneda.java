@@ -2,6 +2,8 @@ package models;
 
 import DTO.MonedaDTO;
 
+import java.util.Scanner;
+
 public class Moneda {
     //atributos de la clase
     private String monedaElegida;
@@ -57,5 +59,19 @@ public class Moneda {
 
     public void setCantidadDeMonedaElegida(Double cantidadDeMonedaElegida) {
         this.cantidadDeMonedaElegida = cantidadDeMonedaElegida;
+    }
+    public MonedaDTO buscarMoneda(String abreviatura){
+        BusquedaMoneda nuevaBusqueda = new BusquedaMoneda();
+        MonedaDTO monedaEncontrada = nuevaBusqueda.monedaElegida(abreviatura);
+        return monedaEncontrada;
+    }
+
+    public String convertirMoneda(MonedaDTO monedaHallada, String monedaAConvertir){
+        System.out.println("Ingresá el valor que deseas convertir: ");
+        Scanner lectura = new Scanner(System.in);
+        var cantidad = lectura.nextDouble();
+        Double conversion = cantidad * monedaHallada.getConversionRate(monedaAConvertir);
+        return "El valor " + cantidad + " " + monedaHallada.base_code() + " corresponde a "
+                + conversion + " " + monedaAConvertir;
     }
 }
